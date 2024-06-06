@@ -11,11 +11,14 @@ import About from './About';
 import Contact from './Contact';
 import Login from './Login';
 import SignUp from './SignUp';
+import Profile from './Profile';
+import Footer from './Footer';
 
 const Container = styled.div`
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
+    padding-bottom: 60px; // Space for footer
 `;
 
 const Nav = styled.nav`
@@ -40,6 +43,8 @@ const ProtectedRoute = ({ element }) => {
 };
 
 function App() {
+    const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
+
     return (
         <Router>
             <Nav>
@@ -47,8 +52,9 @@ function App() {
                 <NavLink to="/form">User Form</NavLink>
                 <NavLink to="/about">About</NavLink>
                 <NavLink to="/contact">Contact</NavLink>
-                <NavLink to="/signup">Sign Up</NavLink>
-                <NavLink to="/login">Login</NavLink>
+                {!isAuthenticated && <NavLink to="/signup">Sign Up</NavLink>}
+                {!isAuthenticated && <NavLink to="/login">Login</NavLink>}
+                {isAuthenticated && <NavLink to="/profile">Profile</NavLink>}
             </Nav>
             <Container>
                 <Routes>
@@ -58,8 +64,10 @@ function App() {
                     <Route path="/contact" element={<Contact />} />
                     <Route path="/signup" element={<SignUp />} />
                     <Route path="/login" element={<Login />} />
+                    <Route path="/profile" element={<ProtectedRoute element={<Profile />} />} />
                 </Routes>
             </Container>
+            <Footer />
             <ToastContainer />
         </Router>
     );

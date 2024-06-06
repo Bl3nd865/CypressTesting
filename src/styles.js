@@ -1,10 +1,10 @@
-// src/styles.js
 import styled from 'styled-components';
 
 export const Container = styled.div`
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
+    padding-bottom: 60px; // Space for footer
 `;
 
 export const Nav = styled.nav`

@@ -1,15 +1,13 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import { Formik, Form as FormikForm, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import Modal from './Modal';
 import { Form, Input, Button, Error } from './styles';
 
 const UserForm = () => {
-    const [showModal, setShowModal] = useState(false);
-    const [apiError, setApiError] = useState('');
+    const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
+    const user = useSelector((state) => state.user);
 
     const validationSchema = Yup.object({
         name: Yup.string().required('Name is required'),
@@ -21,36 +19,29 @@ const UserForm = () => {
         file: Yup.mixed().required('File is required'),
     });
 
-    const handleSubmit = async (values, { setSubmitting, resetForm }) => {
-        try {
-            const formData = new FormData();
-            formData.append('name', values.name);
-            formData.append('email', values.email);
-            formData.append('password', values.password);
-            formData.append('file', values.file);
-
-            await axios.post('https://jsonplaceholder.typicode.com/posts', formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                },
-            });
-
+    const handleSubmit = (values, { setSubmitting, resetForm }) => {
+        // Mock API call
+        setTimeout(() => {
             setSubmitting(false);
-            setShowModal(true);
-            toast.success('Form submitted successfully!');
+            alert('Form submitted successfully!');
             resetForm();
-        } catch (error) {
-            setApiError('Failed to submit form. Please try again later.');
-            toast.error('Failed to submit form. Please try again later.');
-            setSubmitting(false);
-        }
+        }, 1000);
     };
+
+    if (!isAuthenticated) {
+        return (
+            <div>
+                <h1>Login</h1>
+                <p>Please log in to access the user form.</p>
+            </div>
+        );
+    }
 
     return (
         <div>
             <h1>User Form</h1>
             <Formik
-                initialValues={{ name: '', email: '', password: '', confirmPassword: '', file: null }}
+                initialValues={{ name: user.name, email: user.email, password: '', confirmPassword: '', file: null }}
                 validationSchema={validationSchema}
                 onSubmit={handleSubmit}
             >
@@ -87,8 +78,6 @@ const UserForm = () => {
                     </Form>
                 )}
             </Formik>
-            {apiError && <Error>{apiError}</Error>}
-            {showModal && <Modal message="Form submitted successfully!" onClose={() => setShowModal(false)} />}
         </div>
     );
 };

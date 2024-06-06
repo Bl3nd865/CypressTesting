@@ -14,7 +14,7 @@ const FooterContainer = styled.footer`
 const Footer = () => {
     return (
         <FooterContainer>
-            <p>&copy; 2024 My Cypress App. All rights reserved.</p>
+            <p>&copy; 2024 South East European University. All rights reserved.</p>
         </FooterContainer>
     );
 };

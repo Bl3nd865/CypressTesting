@@ -1,22 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import styled from 'styled-components';
-
-const Table = styled.table`
-    width: 100%;
-    border-collapse: collapse;
-`;
-
-const Th = styled.th`
-    border: 1px solid #ddd;
-    padding: 8px;
-    background-color: #f2f2f2;
-`;
-
-const Td = styled.td`
-    border: 1px solid #ddd;
-    padding: 8px;
-`;
+import { Container, Table, Th, Td, Button, DetailView } from './styles';
 
 const MySchedule = () => {
     const user = useSelector((state) => state.user);
@@ -37,14 +21,50 @@ const MySchedule = () => {
             Credit: "6.00"
         },
         // Add more courses as needed
+        {
+            Campus: "TE",
+            CourseCode: "CCS-806",
+            CourseTitle: "Advanced Software Engineering",
+            Type: "L",
+            Language: "EN",
+            Group: "2",
+            Day: "Tuesday",
+            Start: "10:00",
+            End: "12:00",
+            Teacher: "Blend Rexhepi",
+            Supervisor: "",
+            Location: "816.08",
+            Credit: "6.00"
+        },
+        {
+            Campus: "TE",
+            CourseCode: "CCS-807",
+            CourseTitle: "Database Systems",
+            Type: "L",
+            Language: "EN",
+            Group: "1",
+            Day: "Wednesday",
+            Start: "11:00",
+            End: "13:00",
+            Teacher: "B",
+            Supervisor: "",
+            Location: "816.06",
+            Credit: "6.00"
+        }
     ];
+
+    const [selectedCourse, setSelectedCourse] = useState(null);
 
     if (!user.isAuthenticated) {
         return <p>Please log in to view your schedule.</p>;
     }
 
+    const handleViewDetails = (course) => {
+        setSelectedCourse(course);
+    };
+
     return (
-        <div>
+        <Container>
             <h1>My Schedule</h1>
             <Table>
                 <thead>
@@ -62,6 +82,7 @@ const MySchedule = () => {
                         <Th>Supervisor</Th>
                         <Th>Location</Th>
                         <Th>Credit</Th>
+                        <Th>Actions</Th>
                     </tr>
                 </thead>
                 <tbody>
@@ -80,11 +101,26 @@ const MySchedule = () => {
                             <Td>{course.Supervisor}</Td>
                             <Td>{course.Location}</Td>
                             <Td>{course.Credit}</Td>
+                            <Td>
+                                <Button onClick={() => handleViewDetails(course)}>View Details</Button>
+                            </Td>
                         </tr>
                     ))}
                 </tbody>
             </Table>
-        </div>
+            {selectedCourse && (
+                <DetailView>
+                    <h2>Course Details</h2>
+                    <p><strong>Course Title:</strong> {selectedCourse.CourseTitle}</p>
+                    <p><strong>Teacher:</strong> {selectedCourse.Teacher}</p>
+                    <p><strong>Day:</strong> {selectedCourse.Day}</p>
+                    <p><strong>Start Time:</strong> {selectedCourse.Start}</p>
+                    <p><strong>End Time:</strong> {selectedCourse.End}</p>
+                    <p><strong>Location:</strong> {selectedCourse.Location}</p>
+                    <p><strong>Credits:</strong> {selectedCourse.Credit}</p>
+                </DetailView>
+            )}
+        </Container>
     );
 };
 

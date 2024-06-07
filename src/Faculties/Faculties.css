@@ -1,0 +1,66 @@
+.faculty-detail {
+    text-align: center;
+    padding: 20px;
+}
+
+.faculty-detail h1 {
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+.faculty-detail p {
+    font-size: 1.2em;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+.academic-staff-container {
+    text-align: center;
+    padding: 20px;
+}
+
+.staff-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.staff-member {
+    background: #f8f8f8;
+    border: 1px solid #ddd;
+    margin: 10px;
+    padding: 20px;
+    width: 200px;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.staff-member img {
+    max-width: 100%;
+    border-radius: 50%;
+}
+
+.staff-member h3 {
+    margin-top: 10px;
+    font-size: 1.1em;
+}
+
+.staff-member p {
+    margin: 5px 0 0;
+    color: #555;
+}
+
+.back-button {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background: #333;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+   
+}
+
+.back-button:hover {
+    background: #555;
+}

@@ -1,66 +1,50 @@
-.faculty-detail {
+.faculties-container {
     text-align: center;
     padding: 20px;
 }
 
-.faculty-detail h1 {
-    font-size: 2em;
-    margin-bottom: 20px;
+.faculties-container h1 {
+    font-size: 2.5em;
+    margin-bottom: 30px;
 }
 
-.faculty-detail p {
-    font-size: 1.2em;
-    line-height: 1.5;
-    margin-bottom: 20px;
-}
-
-.academic-staff-container {
-    text-align: center;
-    padding: 20px;
-}
-
-.staff-list {
+.faculties-list {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
 }
 
-.staff-member {
+.faculty-item {
     background: #f8f8f8;
     border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin: 10px;
     padding: 20px;
-    width: 200px;
+    width: 250px;
     text-align: center;
-    border-radius: 5px;
+    transition: transform 0.3s;
 }
 
-.staff-member img {
-    max-width: 100%;
-    border-radius: 50%;
+.faculty-item:hover {
+    transform: translateY(-5px);
 }
 
-.staff-member h3 {
-    margin-top: 10px;
-    font-size: 1.1em;
+.faculty-item h2 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
 }
 
-.staff-member p {
-    margin: 5px 0 0;
+.faculty-item p {
+    font-size: 1em;
     color: #555;
 }
 
-.back-button {
-    display: inline-block;
-    margin-top: 20px;
-    padding: 10px 20px;
-    background: #333;
-    color: white;
+.faculty-item a {
+    color: #333;
     text-decoration: none;
-    border-radius: 5px;
-   
 }
 
-.back-button:hover {
-    background: #555;
+.faculty-item a:hover {
+    text-decoration: underline;
 }

@@ -4,8 +4,8 @@ import AcademicStaff from './AcademicStaff';
 import './Faculties.css';
 
 const staffMembers = [
-    { name: 'John Doe', title: 'Professor', photo: require('../images.jpg').default },
-    { name: 'Jane Smith', title: 'Associate Professor', photo: require('../images.jpg').default },
+    { name: 'John Doe', title: 'Professor', photo: '/images.jpg' },
+    { name: 'Jane Smith', title: 'Associate Professor', photo: '/images.jpg' },
     // Add more staff members as needed
 ];
 
